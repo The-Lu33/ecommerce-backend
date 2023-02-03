@@ -37,7 +37,8 @@ export default class product_in_order extends Model {
     },
     status: {
       type: DataTypes.ENUM("pay","pending"),
-      allowNull: true
+      allowNull: true,
+      defaultValue: 'pending'
     }
   }, {
     sequelize,

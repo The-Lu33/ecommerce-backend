@@ -2,7 +2,7 @@ import { compareSync } from "bcrypt";
 import jwt from "jsonwebtoken";
 import * as dotenv from "dotenv";
 dotenv.config();
-import {users} from "../models/index.js";
+import { users } from "../models/index.js";
 // const { users } = models;
 
 export class AuthServices {
@@ -18,8 +18,9 @@ export class AuthServices {
     try {
       const { email, password } = credentials;
 
-      const user = await users.findOne({ where: { email } });
-
+      const user = await users.findOne({
+        where: { email },
+      });
       if (user) {
         const isValid = compareSync(password, user.password);
 

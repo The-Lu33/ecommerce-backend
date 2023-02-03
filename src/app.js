@@ -5,6 +5,8 @@ import db from "./utils/db.js";
 import authRouter from "./routes/auth.routes.js";
 import productRouter from "./routes/product.routes.js";
 import carRouter from "./routes/car.routes.js";
+import orderRouter from "./routes/order.routes.js";
+
 
 
 const app = express();
@@ -19,7 +21,7 @@ db.authenticate()
   .then(() => console.log("Base de datos autenticada"))
   .catch((error) => console.log(error));
 
-// db.sync()
+// db.sync({alter:true})
 //   .then(() => console.log("base de datos sync"))
 //   .catch((error) => console.log(error));
 
@@ -30,6 +32,8 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRouter);
 app.use("/api/product", productRouter);
 app.use("/api/car", carRouter);
+app.use('/api/order', orderRouter)
+
 
 
 

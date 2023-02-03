@@ -4,7 +4,7 @@ export const createProduct = async (req, res) => {
   try {
     const newProduct = req.body;
     const result = await productService.create(newProduct);
-    res.json(result)
+    res.status(201).json(result)
   } catch (error) {
     res.status(400).json(error.message);
   }

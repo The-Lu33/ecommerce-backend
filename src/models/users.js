@@ -2,6 +2,32 @@ import { hashSync } from 'bcrypt';
 import _sequelize from 'sequelize';
 const { Model, Sequelize } = _sequelize;
 
+/**
+ * @openapi
+ * components:
+ *    schemas:
+ *      register:
+ *        type: object
+ *        properties:
+ *          username:
+ *            type: string
+ *            example: JoeDoe
+ *          email:
+ *            type: string
+ *            example: joe@doe.com
+ *          password:
+ *            type: string
+ *            example: 1234
+ *      login:
+ *        type: object
+ *        properties:
+ *          email:
+ *            type: string
+ *            example: joe@doe.com
+ *          password:
+ *            type: string
+ *            example: 1234
+ */
 export default class users extends Model {
   static init(sequelize, DataTypes) {
   return super.init({

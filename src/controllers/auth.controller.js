@@ -9,6 +9,7 @@ export const register = async (req, res) => {
     const result = await AuthServices.register(user);
     if (result) {
       await carService.create(result.id);
+      
       res.status(201).json({ message: "user created" });
       // await transporter.sendMail({
       //   from: process.env.EMISORMAILER,
