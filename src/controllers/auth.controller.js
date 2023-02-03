@@ -11,12 +11,12 @@ export const register = async (req, res) => {
       await carService.create(result.id);
       
       res.status(201).json({ message: "user created" });
-      // await transporter.sendMail({
-      //   from: process.env.EMISORMAILER,
-      //   to: result.email,
-      //   subject: "Binvenido a la App",
-      //   html: `<h1>Binvenido a a la app confirme to email <a href="#" target="new_blank">click aqui</a></h1>`,
-      // });
+      await transporter.sendMail({
+        from: process.env.EMISORMAILER,
+        to: result.email,
+        subject: "Binvenido a la App",
+        html: `<h1>Binvenido a a la app confirme to email <a href="#" target="new_blank">click aqui</a></h1>`,
+      });
     } else {
       res.status(400).json({ message: "something wrong" });
     }
