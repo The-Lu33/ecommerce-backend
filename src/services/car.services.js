@@ -24,16 +24,19 @@ export class carService {
           id: product_id,
         },
       });
-
-      const price = productData.price * quatity;
-      const result = await product_in_cart.create({
-        cart_id,
-        product_id,
-        quatity,
-        price,
-        status: productData.status,
-      });
-      return result;
+      if (productData === null) {
+        return null;
+      } else {
+        const price = productData.price * quatity;
+        const result = await product_in_cart.create({
+          cart_id,
+          product_id,
+          quatity,
+          price,
+          status: productData.status,
+        });
+        return result;
+      }
     } catch (error) {
       throw error;
     }
@@ -69,33 +72,33 @@ export class carService {
   static async purchaseProduct(userID) {
     try {
       const car = await this.productsCar(userID);
-      if (car.total_price === "0") {
-        return 'no hay productos'
-      } else{
-
+      console.log(car.total_price);
+      if (car.total_price === 0) {
+        return "no hay productos";
+      } else {
         const dataOrder = {
           user_id: car.userId,
           total_price: car.total_price,
         };
-      const newOrder = await order.create(dataOrder);
-      const productInCar = car.product_in_carts;
-      // console.log(product_in_carts);
-      productInCar.forEach(async (products) => {
-        const data = {};
-        data.order_id = newOrder.id;
-        data.product_id = products.product_id;
-        data.quatity = products.quatity;
-        data.price = products.price;
-        await product_in_order.create(data);
-      });
-      await product_in_cart.destroy({
-        where: {
-          cart_id: car.id,
-        },
-      });
-      await this.clearCar(userID);
-      return newOrder;
-    }
+        const newOrder = await order.create(dataOrder);
+        const productInCar = car.product_in_carts;
+        // console.log(product_in_carts);
+        productInCar.forEach(async (products) => {
+          const data = {};
+          data.order_id = newOrder.id;
+          data.product_id = products.product_id;
+          data.quatity = products.quatity;
+          data.price = products.price;
+          await product_in_order.create(data);
+        });
+        await product_in_cart.destroy({
+          where: {
+            cart_id: car.id,
+          },
+        });
+        await this.clearCar(userID);
+        return newOrder;
+      }
     } catch (error) {
       throw error;
     }

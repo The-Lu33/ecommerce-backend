@@ -4,25 +4,52 @@ const { Model, Sequelize } = _sequelize;
 /**
  * @openapi
  * components:
- *    schemas:
- *      created:
- *        type: object
- *        properties:
- *          name:
- *            type: string
- *            example: Freidora de Aire
- *          qty_available:
- *            type: number
- *            example: 1
- *          price:
- *            type: number
- *            example: 100.00
- *          image_url:
- *            type: string
- *            example: https://ae01.alicdn.com/kf/Scd7c8f057c764c56be0ace4e15dbadf0f/ANYUFA-freidora-de-aire-el-ctrica-sin-aceite-de-4-6L-horno-de-360-LED-para.jpg_Q90.jpg_.webp
- *          user_id:
- *            type: number
- *            example: 1
+ *   schemas:
+ *     products:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *           example: 1
+ *         name:
+ *           type: string
+ *           example: freidora de aire
+ *         price:
+ *           type: integer
+ *           example: 100.00
+ *         qty_available:
+ *           type: integer
+ *           example: 1
+ *         status:
+ *           type: string
+ *           example: available
+ *         image_url:
+ *           type: string
+ *           example: imageURL
+ *         user_id:
+ *           type: integer
+ *           example: 1
+ *     created:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *           example: freidora de aire
+ *         price:
+ *           type: number
+ *           example: 100.00
+ *         qty_available:
+ *           type: number
+ *           example: 1
+ *         status:
+ *           type: string
+ *           example: available
+ *         image_url:
+ *           type: string
+ *           example: imageURL
+ *         user_id:
+ *           type: integer
+ *           example: 1
  */
 export default class product extends Model {
   static init(sequelize, DataTypes) {

@@ -12,9 +12,9 @@ export class orderServices {
   }
   static async paymentService(orderCheck) {
     try {
-      const { pay, orderID } = orderCheck;
-      if (pay === "sucess") {
-        await order.update(
+      const { statusPay, orderID } = orderCheck;
+      if (statusPay === "pay") {
+        const result = await order.update(
           { status: "pay" },
           {
             where: {
@@ -22,7 +22,11 @@ export class orderServices {
             },
           }
         );
-        return { message: "pay" };
+        if (result[0] === 0) {
+          return { message: "order undefined" };
+        } else {
+          return { message: "pay" };
+        }
       } else {
         return { message: "Not payment" };
       }

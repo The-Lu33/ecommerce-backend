@@ -5,16 +5,22 @@ export const addProduct = async (req, res) => {
     const productForCar = req.body;
     const productAddCar = await carService.add(productForCar);
 
-    res.json(productAddCar);
+    if (productAddCar === null) {
+      res.json({
+        message: "producto no disponible || product not available",
+      });
+    } else {
+      res.json({ message: "add product succes" });
+    }
   } catch (error) {
     res.status(400).json(error.message);
   }
 };
 export const carProducts = async (req, res) => {
   try {
-    const { id:userID } = req.params;
+    const { id: userID } = req.params;
     const productsInCar = await carService.productsCar(userID);
-    res.json(productsInCar);
+    res.json(productsInCar.product_in_carts);
   } catch (error) {
     res.status(400).json(error.message);
   }
@@ -25,8 +31,6 @@ export const carPurchase = async (req, res) => {
     const purchase = await carService.purchaseProduct(id);
     res.json(purchase);
   } catch (error) {
-    res.status(400).json(error.message)
+    res.status(400).json(error.message);
   }
 };
-
-

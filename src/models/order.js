@@ -1,6 +1,35 @@
 import _sequelize from "sequelize";
 const { Model, Sequelize } = _sequelize;
 
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     orders:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *           example: 1
+ *         total_price:
+ *           type: number
+ *           example: 1000.00
+ *         user_id:
+ *           type: integer
+ *           example: 1
+ *         status:
+ *           type: string
+ *           example: pending
+ *     payment:
+ *       type: object
+ *       properties:
+ *         statusPay:
+ *           type: string
+ *           example: pay
+ *         orderId:
+ *            type: integer
+ *            example: 1
+*/
 export default class order extends Model {
   static init(sequelize, DataTypes) {
     return super.init(

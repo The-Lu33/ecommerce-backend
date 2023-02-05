@@ -10,7 +10,7 @@ const router = Router();
  * /api/product/create:
  *   post:
  *     sumary: Created a new product in the app
- *     tags: [products]
+ *     tags: [Products]
  *     requestBody:
  *       description: requiered fields to create a new product
  *       required: true
@@ -42,25 +42,22 @@ const router = Router();
  * /api/product/all:
  *   get:
  *     sumary: all products
- *     tags: [products]
- *     requestBody:
- *       description: view all products of the app
- *       require: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/created'
+ *     tags: [Products]
  *     responses:
  *       200:
- *         descroption: all products
+ *         description: all products
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 message:
- *                 type: string
- *                 example: example
+ *                 status:
+ *                   type: string
+ *                   example: ok
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/products'
  */
 
 router.post("/create", createProduct);

@@ -1,6 +1,7 @@
 import { Op } from "sequelize";
 import { product } from "../models/index.js";
 
+
 export class productService {
   static async create(newProduct) {
     try {
