@@ -1,5 +1,5 @@
 import { AuthServices } from "../services/auth.services.js";
-// import transporter from "../utils/mailer.js";
+import transporter from "../utils/mailer.js";
 import * as dotenv from "dotenv";
 import { carService } from "../services/car.services.js";
 dotenv.config();
@@ -9,13 +9,24 @@ export const register = async (req, res) => {
     const result = await AuthServices.register(user);
     if (result) {
       await carService.create(result.id);
-      
+
       res.status(201).json({ message: "user created" });
-      await transporter.sendMail({
+      const mail = {
         from: process.env.EMISORMAILER,
         to: result.email,
-        subject: "Binvenido a la App",
-        html: `<h1>Binvenido a a la app confirme to email <a href="#" target="new_blank">click aqui</a></h1>`,
+        subject: `Bienvenido a switmer ${result.username}`,
+        template: "email",
+        context: {
+          title: "Title Here",
+          text: "Lorem ipsum dolor sit amet, consectetur...",
+        },
+      };
+      transporter.sendMail(mail, (error, info) => {
+        if (error) {
+          console.log(error); 
+        } else {
+          console.log("email sent:" + info.response);
+        }
       });
     } else {
       res.status(400).json({ message: "something wrong" });

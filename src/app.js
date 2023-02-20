@@ -21,9 +21,9 @@ db.authenticate()
   .then(() => console.log("Base de datos autenticada"))
   .catch((error) => console.log(error));
 
-// db.sync({alter:true})
-//   .then(() => console.log("base de datos sync"))
-//   .catch((error) => console.log(error));
+db.sync()
+  .then(() => console.log("base de datos sync"))
+  .catch((error) => console.log(error));
 
 app.get("/", (req, res) => {
   res.json({ message: "welcome to server" });
