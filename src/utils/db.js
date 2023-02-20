@@ -9,7 +9,9 @@ const db = new Sequelize({
   password: process.env.DB_PASSWORD,
   dialect: "postgres",
   logging: false,
-  ssl: true,
+  dialectOptions: {
+    ssl: { require: true, rejectUnauthorized: false },
+  },
 });
 
 export default db;
