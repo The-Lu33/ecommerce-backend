@@ -5,11 +5,15 @@ import path from "path";
 import hbs from "nodemailer-express-handlebars";
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
-  port: "465",
-  secure: true,
+  port: "587",
+  secure: false,
   auth: {
     user: "luiseducol13@gmail.com",
     pass: process.env.GPASSWORD,
+  },
+  tls: {
+    ciphers: "SSLv3",
+    rejectUnauthorized: false,
   },
 });
 const handlebarOptions = {
@@ -21,6 +25,6 @@ const handlebarOptions = {
   viewPath: path.resolve("./src/views"),
   extName: ".handlebars",
 };
-transporter.use("compile", hbs(handlebarOptions))
+transporter.use("compile", hbs(handlebarOptions));
 
 export default transporter;
