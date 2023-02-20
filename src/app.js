@@ -7,8 +7,6 @@ import productRouter from "./routes/product.routes.js";
 import carRouter from "./routes/car.routes.js";
 import orderRouter from "./routes/order.routes.js";
 
-
-
 const app = express();
 
 app.use(express.json());
@@ -17,7 +15,7 @@ app.use(morgan("tiny"));
 
 // init models
 // authentica db
-db.authenticate()
+db.authenticate({ force: true })
   .then(() => console.log("Base de datos autenticada"))
   .catch((error) => console.log(error));
 
@@ -32,9 +30,6 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRouter);
 app.use("/api/product", productRouter);
 app.use("/api/car", carRouter);
-app.use('/api/order', orderRouter)
-
-
-
+app.use("/api/order", orderRouter);
 
 export default app;
