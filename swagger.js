@@ -15,7 +15,7 @@ const options = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "Chat API",
+      title: "Ecommerce Backend",
       version: "1.0.0",
       description: "API para un ecommers",
     },
